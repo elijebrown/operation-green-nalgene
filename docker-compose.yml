@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "8080:8080"
+      - "5173:5173"
+    working_dir: /app
+    command: ["nodemon", "--watch", "src", "--exec", "tsc && node dist/index.js"]
