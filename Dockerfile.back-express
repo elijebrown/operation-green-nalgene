@@ -2,11 +2,9 @@ FROM node:20
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY packages/back-express .
 
 RUN npm install
-
-COPY packages/back-express ./src
 
 ENV PORT=3000
 ENV NODE_ENV=development

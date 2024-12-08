@@ -10,8 +10,25 @@ services:
       watch:
         - action: sync
           path: ./packages/back-express
-          target: /app/src
+          target: /app/
           ignore:
             - node_modules/
         - action: rebuild
           path: package.json
+
+  front-react:
+    build:
+      context: .
+      dockerfile: Dockerfile.front-react
+    ports: 
+      - "5173:5173"
+    working_dir: /app
+    develop:
+      watch:
+        - action: rebuild
+          path: package.json
+        - action: sync
+          path: ./packages/front-react
+          target: /app
+          ignore:
+            - node_modules/

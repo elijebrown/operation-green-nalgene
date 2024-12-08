@@ -1,0 +1,14 @@
+FROM node:20
+
+WORKDIR /app
+
+COPY packages/front-react .
+
+RUN npm install
+
+ENV PORT=5173
+ENV NODE_ENV=development
+
+EXPOSE 5173
+
+CMD ["npm", "run", "dev"]
