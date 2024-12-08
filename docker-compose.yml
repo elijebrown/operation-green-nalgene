@@ -1,13 +1,17 @@
 services:
-  app:
+  back-express:
     build:
       context: .
-      dockerfile: Dockerfile
-    volumes:
-      - .:/app
-      - /app/node_modules
-    ports:
-      - "8080:8080"
-      - "5173:5173"
+      dockerfile: Dockerfile.back-express
+    ports: 
+      - "3000:3000"
     working_dir: /app
-    command: ["nodemon", "--watch", "src", "--exec", "tsc && node dist/index.js"]
+    develop:
+      watch:
+        - action: sync
+          path: ./packages/back-express
+          target: /app/src
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
