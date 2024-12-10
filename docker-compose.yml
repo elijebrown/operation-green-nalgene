@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.back-express
-    ports: 
+    ports:
       - "3000:3000"
     working_dir: /app
     develop:
@@ -32,3 +32,16 @@ services:
           target: /app
           ignore:
             - node_modules/
+
+  database:
+    image: paradedb/paradedb:latest
+    environment:
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_DB: "${DB_NAME}"
+    ports:
+      - "5432:5432"
+    volumes:
+      - paradedb_data:/var/lib/postgresql/database
+volumes:
+  paradedb_data:
