@@ -6,4 +6,4 @@ COPY packages/back-express .
 
 RUN npm install
 
-CMD ["npx", "nodemon", "src/server.js"]
+CMD ["npx", "nodemon"]
