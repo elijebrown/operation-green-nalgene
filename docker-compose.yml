@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile.back-express
     ports:
       - "3000:3000"
+    networks:
+      - app-network
     working_dir: /app
     develop:
       watch:
@@ -36,13 +38,20 @@ services:
   database:
     image: paradedb/paradedb:latest
     container_name: database
+    networks:
+      - app-network
     environment:
       POSTGRES_USER: "pablo_escobar_gaviria"
       POSTGRES_PASSWORD: "APyRnWxbJu7JB#"
       POSTGRES_DB: "narcos"
     ports:
-      - "5433:5433"
+      - "5433:5432"
     volumes:
-      - paradedb_data:/var/lib/postgresql/database
+      - photo-db:/var/lib/postgresql/data  # Mount the volume for the database data
+
 volumes:
-  paradedb_data:
+  photo-db:   
+    external: true
+networks:
+  app-network:
+    driver: bridge

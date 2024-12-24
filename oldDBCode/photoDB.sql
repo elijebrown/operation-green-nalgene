@@ -14,7 +14,7 @@ CREATE TABLE provinces (
 
 -- Create the cities table
 CREATE TABLE cities (
-    province_name TEXT UNIQUE,
+    province_name TEXT NOT NULL,
     city_name TEXT NOT NULL,
     id SERIAL PRIMARY KEY,
     FOREIGN KEY (province_name) REFERENCES provinces(province_name)

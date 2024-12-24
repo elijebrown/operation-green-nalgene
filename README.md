@@ -6,3 +6,7 @@
 - launch command: docker-compose up --watch 
   - -d (daemon) to run in background
   - --build to rebuild the containers
+
+
+docker exec -it database psql -U pablo_escobar_gaviria -d narcos -W
+APyRnWxbJu7JB#
