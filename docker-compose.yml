@@ -1,5 +1,6 @@
 services:
   back-express:
+    container_name: back-express
     build:
       context: .
       dockerfile: Dockerfile.back-express
@@ -19,6 +20,7 @@ services:
           path: ./packages/back-express/package.json
 
   front-react:
+    container_name: front-react
     build:
       context: .
       dockerfile: Dockerfile.front-react
