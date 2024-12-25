@@ -1,13 +1,15 @@
 -- Create the countries table
 CREATE TABLE countries (
-    country_name TEXT PRIMARY KEY,
-    country_code TEXT UNIQUE NOT NULL
+    country_name TEXT UNIQUE,
+    country_code TEXT UNIQUE,
+    id SERIAL PRIMARY KEY
 );
 
 -- Create the provinces table
 CREATE TABLE provinces (
+    id SERIAL PRIMARY KEY
     country_name TEXT NOT NULL,
-    province_name TEXT PRIMARY KEY,
+    province_name TEXT NOT NULL,
     province_code TEXT NOT NULL,
     FOREIGN KEY (country_name) REFERENCES countries(country_name)
 );

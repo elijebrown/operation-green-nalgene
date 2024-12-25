@@ -30,6 +30,13 @@ app.get('/', async (req: Request, res: Response) => {
     }
 });
 
+app.get('/test', async (req: Request, res: Response) => {
+    const result = await pool.query(`SELECT country_name, paradedb.score(id) FROM countries
+WHERE country_name @@@ '${req.query.search || ''}'
+ORDER BY score DESC;`)
+    res.send(result.rows)
+})
+
 createGetterRoutes().then((response) => {
     app.listen(PORT, (): void => {
         console.log(`Server is running on http://localhost:${PORT}`);
