@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import { Pool } from 'pg';
 import { createGetterRoutes } from './fetchTableNames';
+import { tripNgram } from './routes/indexSearch/tripNgram';
 
 export const app = express();
 const PORT = 3000;
@@ -36,6 +37,8 @@ WHERE country_name @@@ '${req.query.search || ''}'
 ORDER BY score DESC;`)
     res.send(result.rows)
 })
+
+tripNgram()
 
 createGetterRoutes().then((response) => {
     app.listen(PORT, (): void => {

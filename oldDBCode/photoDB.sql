@@ -69,3 +69,11 @@ CREATE TABLE memory_photo (
     FOREIGN KEY (photo_id) REFERENCES photos(id)
 );
 
+CREATE TABLE trip_photos (
+    trip_id INT NOT NULL,
+    photo_id INT NOT NULL,
+    PRIMARY KEY (trip_id, photo_id),
+    FOREIGN KEY (trip_id) REFERENCES trips(id),
+    FOREIGN KEY (photo_id) REFERENCES photos(id)
+);
+

@@ -25,7 +25,7 @@ CREATE INDEX ngramsTrips_idx ON public.trips
 USING bm25 (id, trip_name)
 WITH (
     key_field='id',
-    text_fields='{"trip_name": {"tokenizer": {"type": "ngram", "min_gram": 1, "max_gram": 3, "prefix_only": true}}}'
+    text_fields='{"trip_name": {"tokenizer": {"type": "ngram", "min_gram": 1, "max_gram": 3, "prefix_only": false}}}'
 );
 
 CREATE INDEX ngramsMemories_idx ON public.memories
