@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { Pool } from 'pg';
 import { createGetterRoutes } from './fetchTableNames';
 import { tripNgram } from './routes/indexSearch/tripNgram';
+import { cityNgram } from './routes/indexSearch/citiesNgram';
 
 export const app = express();
 const PORT = 3000;
@@ -32,13 +33,14 @@ app.get('/', async (req: Request, res: Response) => {
 });
 
 app.get('/test', async (req: Request, res: Response) => {
-    const result = await pool.query(`SELECT country_name, paradedb.score(id) FROM countries
-WHERE country_name @@@ '${req.query.search || ''}'
-ORDER BY score DESC;`)
+    const result = await pool.query(`SELECT DISTINCT c.id, c.city_name
+FROM cities c
+JOIN photos p ON c.id = p.city_id`)
     res.send(result.rows)
 })
 
 tripNgram()
+cityNgram()
 
 createGetterRoutes().then((response) => {
     app.listen(PORT, (): void => {
