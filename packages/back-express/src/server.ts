@@ -3,6 +3,7 @@ import { Pool } from 'pg';
 import { createGetterRoutes } from './fetchTableNames';
 import { tripNgram } from './routes/indexSearch/tripNgram';
 import { cityNgram } from './routes/indexSearch/citiesNgram';
+import { provinceNgram } from './routes/indexSearch/provinceNgram';
 
 export const app = express();
 const PORT = 3000;
@@ -16,6 +17,11 @@ export const pool = new Pool({
     port: 5432,
 })
   
+
+app.use((req: Request, res: Response, next) => {
+    console.log(req.url)
+    next()
+})
 
 // Define a simple route with type annotations
 app.get('/', async (req: Request, res: Response) => {
@@ -41,6 +47,7 @@ JOIN photos p ON c.id = p.city_id`)
 
 tripNgram()
 cityNgram()
+provinceNgram()
 
 createGetterRoutes().then((response) => {
     app.listen(PORT, (): void => {

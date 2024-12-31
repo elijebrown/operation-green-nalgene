@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, ChangeEventHandler, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -7,6 +7,39 @@ import { Input } from './components/ui/input'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [text, setText] = useState('')
+  const [result, setResult] = useState('')
+
+  const handleChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    const searchValue = event.target.value;
+    
+    // Set the text state with the current input value
+    setText(searchValue);
+  
+    // Log the input value for debugging
+  
+    try {
+      // Send the GET request with the query parameter 'search'
+      const response = await fetch(`http://localhost:3000/cityNgram?search=${encodeURIComponent(searchValue)}`, {
+        method: 'GET', // Default is 'GET', you can omit this if you want
+        headers: {
+          'Content-Type': 'application/json', // Add headers if needed
+        },
+      });
+  
+      // Handle the response
+      if (response.ok) {
+        const data = await response.json(); // Assuming the server returns JSON
+        console.log(data);
+        setResult(JSON.stringify(data))
+      } else {
+        console.error('Error fetching data:', response.status);
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  };
+  
 
   return (
     <>
@@ -19,7 +52,8 @@ function App() {
         </a>
       </div>
       <h1>ssb</h1>
-      <Input title='input your bob here'></Input>
+      <Input onChange={handleChange} value={text} title='input your bob here'></Input>
+      <h2>{result}</h2>
       <Button variant='default'><small className="text-sm font-medium leading-none">hello</small></Button>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>

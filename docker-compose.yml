@@ -21,6 +21,8 @@ services:
 
   front-react:
     container_name: front-react
+    networks:
+      - app-network
     build:
       context: .
       dockerfile: Dockerfile.front-react
