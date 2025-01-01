@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import cors from 'cors';
 import { Pool } from 'pg';
 import { createGetterRoutes } from './fetchTableNames';
 import { tripNgram } from './routes/indexSearch/tripNgram';
@@ -16,7 +17,12 @@ export const pool = new Pool({
     password: "APyRnWxbJu7JB#",
     port: 5432,
 })
-  
+
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+ }))
 
 app.use((req: Request, res: Response, next) => {
     console.log(req.url)
