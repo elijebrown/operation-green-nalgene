@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { urlBasePath } from '../types-constants/constants'
 import { mapKeys, camelCase } from 'lodash';
 import { tablesType } from '../types-constants/types'
 

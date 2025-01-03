@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
-import viteLogo from '/vite.svg'
+/**
+ * @fileoverview get all db data and hydrate react router with routes
+ */
+
 import '../styles/App.css'
 import '@mantine/core/styles.css'
 import {
@@ -10,6 +12,7 @@ import {
 
 import { MantineProvider } from '@mantine/core'
 import { Navbar } from './Navbar'
+import { Outlet } from 'react-router'
 
 function App() {
     const queryClient = new QueryClient()
@@ -24,6 +27,7 @@ function App() {
             <QueryClientProvider client={queryClient}>
                 <MantineProvider defaultColorScheme="dark">
                     <Navbar></Navbar>
+                    <Outlet />
                 </MantineProvider>
             </QueryClientProvider>
         </>
