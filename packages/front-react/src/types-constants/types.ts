@@ -1,4 +1,10 @@
-export type tablesType = 'countries' | 'provinces' | 'cities' | 'trips' | 'memories' | 'photos'
+export type tablesType =
+    | 'countries'
+    | 'provinces'
+    | 'cities'
+    | 'trips'
+    | 'memories'
+    | 'photos'
 
 export type tripsType = {
     id: number
@@ -12,4 +18,12 @@ export type memoriesType = {
     tripId: number
     memoryText: string
     memoryName: string
+}
+
+export type photosType = {
+    caption?: string
+    cityId: number
+    date: string
+    id: number
+    photoFilepath: string
 }

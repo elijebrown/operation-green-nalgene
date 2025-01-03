@@ -1,11 +1,15 @@
-import axios from "axios"
-import { tablesType } from "../types-constants/types"
-import { camelCase, mapKeys } from "lodash"
+import axios from 'axios'
+import { camelCase, mapKeys } from 'lodash'
 
-export const matchSearchText = async <T>(inputStr: string, table: tablesType): Promise<T | null> => {
+export const fetch = async <T>(
+    endpoint: string,
+    inputStr?: string
+): Promise<T | null> => {
     try {
-        const result = await axios.get(`http://127.0.0.01:3000/cityNgram?search=${inputStr}`)
-        const camelCasedData = result.data?.map((item: any) =>
+        const result = await axios.get(
+            `http://127.0.0.01:3000/${endpoint}?search=${inputStr || ''}`
+        )
+        const camelCasedData = result?.data?.map((item: any) =>
             mapKeys(item, (_, key) => camelCase(key))
         )
         console.log(camelCasedData)
@@ -13,5 +17,5 @@ export const matchSearchText = async <T>(inputStr: string, table: tablesType): P
     } catch (error) {
         console.error(error)
         return null
-    } 
+    }
 }

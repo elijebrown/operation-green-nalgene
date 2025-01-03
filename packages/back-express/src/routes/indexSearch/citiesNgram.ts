@@ -9,8 +9,7 @@ export const cityNgram = () => (
             searchColumn: 'city_name',
             limit: 100,
             extraColumns: ['id']
-        })}) ${visitedCities('matchingCities')}
-        ORDER BY score DESC 
+        })}) ${visitedCities('matchingCities')} 
             `, [req.query.search || ''])
         res.send(result.rows)
     }))

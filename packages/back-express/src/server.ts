@@ -5,6 +5,7 @@ import { createGetterRoutes } from './fetchTableNames';
 import { tripNgram } from './routes/indexSearch/tripNgram';
 import { cityNgram } from './routes/indexSearch/citiesNgram';
 import { provinceNgram } from './routes/indexSearch/provinceNgram';
+import { getTripPhotos } from './routes/getTripPhotos';
 
 export const app = express();
 const PORT = 3000;
@@ -54,6 +55,7 @@ JOIN photos p ON c.id = p.city_id`)
 tripNgram()
 cityNgram()
 provinceNgram()
+getTripPhotos()
 
 createGetterRoutes().then((response) => {
     app.listen(PORT, (): void => {
