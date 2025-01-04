@@ -5,7 +5,7 @@
 -- Dumped from database version 17.2 (Debian 17.2-1.pgdg120+1)
 -- Dumped by pg_dump version 17.2 (Debian 17.2-1.pgdg120+1)
 
--- Started on 2024-12-29 21:44:45 UTC
+-- Started on 2025-01-04 16:17:01 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1474,7 +1474,7 @@ ALTER TABLE ONLY public.trip_photos
     ADD CONSTRAINT trip_photos_trip_id_fkey FOREIGN KEY (trip_id) REFERENCES public.trips(id);
 
 
--- Completed on 2024-12-29 21:44:52 UTC
+-- Completed on 2025-01-04 16:17:08 UTC
 
 --
 -- PostgreSQL database dump complete
