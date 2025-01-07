@@ -1,10 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/index.css'
-import App from './pages/App.tsx'
+import App from './components/App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router'
-import { tripsPageloader } from './pages/loaders/trips.ts'
-import { Trip } from './pages/Trip.tsx'
+import { tripsPageloader } from './components/loaders/trips.ts'
+import { Trip } from './components/Trip.tsx'
 const router = createBrowserRouter([
     {
         path: '/',
