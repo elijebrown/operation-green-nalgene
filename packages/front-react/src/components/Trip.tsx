@@ -5,7 +5,7 @@ import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary } from "@cloudinary/url-gen";
 import { cldBaseUrl } from '../types-constants/constants';
 import { Flex, Grid, Image, Paper, Stack } from '@mantine/core';
-import { scale } from '@cloudinary/url-gen/actions/resize';
+import { scale, crop, limitFill, fit } from '@cloudinary/url-gen/actions/resize';
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 
 export const Trip = () => {
@@ -21,18 +21,17 @@ export const Trip = () => {
         }
     })
     return (
-        <Stack>
+        <Flex justify='center' gap={10} display={'flex'} wrap={'wrap'}>
             {photosObjArr?.map((value) => {
                 const cldImg = cloudinary.image(value.photoFilepath)
                 .format('auto')
                 .quality('auto')
-                .resize(scale().width(400))
+                .resize(fit(1200,1200))
                 .roundCorners(byRadius(12))
                 .toURL()
-                return (<Paper shadow='md' pr={'20px'} key={value.photoFilepath} style={{maxWidth:'400px', borderRadius: '15px'}}>
-                        <img src={cldImg} style={{borderRadius: '7px'}}/>
-                        </Paper>)
+                return (
+                        <img src={cldImg} style={{height: '300px', borderRadius: '7px', minWidth: 'auto', objectFit: 'contain'}}/>)
             })}
-        </Stack>
+        </Flex>
     )
 }
