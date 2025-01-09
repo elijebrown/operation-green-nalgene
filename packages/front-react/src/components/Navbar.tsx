@@ -21,7 +21,14 @@ export const Navbar = () => {
                     Home
                 </Button>
                 <HoverCardNavButtons />
-                <Button variant="subtle" color="orange" size="md">
+                <Button
+                    variant="subtle"
+                    color="orange"
+                    size="md"
+                    onClick={() => {
+                        navigate('/photos')
+                    }}
+                >
                     Photos
                 </Button>
                 <Button variant="subtle" color="orange" size="md">

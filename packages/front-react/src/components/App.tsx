@@ -13,6 +13,7 @@ import {
 import { MantineProvider } from '@mantine/core'
 import { Navbar } from './Navbar'
 import { Outlet } from 'react-router'
+import '@mantine/carousel/styles.css'
 
 function App() {
     const queryClient = new QueryClient()

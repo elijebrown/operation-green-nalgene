@@ -1,20 +1,20 @@
 import { Button, HoverCard, Stack } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { memoriesType, tripsType } from '../types-constants/types'
-import { fetchAllFromTable } from '../async/trips'
 import { useNavigate } from 'react-router'
+import { fetch } from '../async/fetch'
 
 export const HoverCardNavButtons = () => {
     const navigate = useNavigate()
 
     const trips = useQuery({
         queryKey: ['tripNames'],
-        queryFn: () => fetchAllFromTable<tripsType[]>('trips'),
+        queryFn: () => fetch<tripsType[]>('trips'),
     })
 
     const memories = useQuery({
         queryKey: ['memoryNames'],
-        queryFn: () => fetchAllFromTable<memoriesType[]>('memories'),
+        queryFn: () => fetch<memoriesType[]>('memories'),
     })
 
     return (

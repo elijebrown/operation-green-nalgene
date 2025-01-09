@@ -9,9 +9,16 @@ export const fetch = async <T>(
         const result = await axios.get(
             `http://127.0.0.01:3000/${endpoint}?search=${inputStr || ''}`
         )
-        const camelCasedData = result?.data?.map((item: any) =>
-            mapKeys(item, (_, key) => camelCase(key))
-        )
+        let camelCasedData: any = null
+        if (result?.data?.rows) {
+            camelCasedData = result.data.rows.map((item: any) =>
+                mapKeys(item, (_, key) => camelCase(key))
+            )
+        } else {
+            camelCasedData = result?.data?.map((item: any) =>
+                mapKeys(item, (_, key) => camelCase(key))
+            )
+        }
         console.log(camelCasedData)
         return camelCasedData as T
     } catch (error) {

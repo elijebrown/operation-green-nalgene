@@ -3,8 +3,12 @@ import { createRoot } from 'react-dom/client'
 import './styles/index.css'
 import App from './components/App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router'
-import { tripsPageloader } from './components/loaders/trips.ts'
 import { Trip } from './components/Trip.tsx'
+import { genericLoaderFunction } from './async/genericLoaderFunction.ts'
+import { Photos } from './components/Photos.tsx'
+
+const tripsLoader = genericLoaderFunction('tripPhotos', 'tripId')
+const photosLoader = genericLoaderFunction('photos')
 const router = createBrowserRouter([
     {
         path: '/',
@@ -20,7 +24,7 @@ const router = createBrowserRouter([
                     {
                         path: ':tripId',
                         element: <Trip />,
-                        loader: tripsPageloader,
+                        loader: tripsLoader,
                     },
                 ],
             },
@@ -39,6 +43,8 @@ const router = createBrowserRouter([
             },
             {
                 path: 'photos',
+                element: <Photos />,
+                loader: photosLoader,
             },
         ],
     },

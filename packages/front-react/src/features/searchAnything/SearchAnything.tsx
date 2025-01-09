@@ -1,6 +1,6 @@
 import { MantineSize, TextInput } from '@mantine/core'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { fetch } from '../../async/matchCities'
+import { fetch } from '../../async/fetch'
 
 type props = {
     size?: MantineSize
