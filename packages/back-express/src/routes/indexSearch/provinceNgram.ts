@@ -5,14 +5,7 @@ import { Request, Response } from 'express'
 export const provinceNgram = () => (
     app.get('/provinceNgram', async (req: Request, res: Response) => {
         const result = await pool.query(
-            `
-            WITH matchingProvinces AS (${ngramSearchStringBuilder({
-                table: 'provinces',
-                searchColumn: 'province_name',
-                extraColumns: ['id']
-            })}),
-            ${visitedProvinces('matchingProvinces')}
-            `
+            visitedProvinces
             , [req.query.search || ''])
         res.send(result.rows)
     }))
