@@ -21,3 +21,9 @@ APyRnWxbJu7JB#
 
 docker cp database:/tmp/backupDatabase.sql ./backupDatabase.sql
 
+### Restoring the Database with Pg_restore
+docker exec -e PGPASSWORD='APyRnWxbJu7JB#' \
+  -i database psql -U pablo_escobar_gaviria -d narcos \
+  < backupDatabase.sql
+
+docker exec -e PGPASSWORD='APyRnWxbJu7JB#' database pg_dump -U pablo_escobar_gaviria --verbose --no-acl --no-owner narcos > backupDatabase.sql
