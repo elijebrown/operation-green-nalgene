@@ -3,6 +3,7 @@ import { Cloudinary } from '@cloudinary/url-gen/index'
 import { fill, fit, scale } from '@cloudinary/url-gen/actions/resize'
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity'
 import { Carousel } from '@mantine/carousel'
+import { Image } from '@mantine/core'
 
 type props = { photos: photosType[] }
 export const CarouselView = ({ photos }: props) => {
@@ -13,7 +14,7 @@ export const CarouselView = ({ photos }: props) => {
     })
 
     return (
-        <Carousel slideSize={'auto'} slideGap={'md'} loop align={'center'}>
+        <Carousel slideSize={'fit-content'} dragFree slideGap={'md'} loop align={'start'}>
             {photos.map((value) => {
                 const cldImg = cloudinary
                     .image(value.photoFilepath)
@@ -26,7 +27,7 @@ export const CarouselView = ({ photos }: props) => {
 
                 return (
                     <Carousel.Slide key={value.photoFilepath}>
-                        <img
+                        <Image
                             src={cldImg}
                             style={{ maxHeight: '500px', minWidth: 'auto'}}
                         />

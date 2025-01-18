@@ -1,6 +1,8 @@
-import { MantineSize, TextInput } from '@mantine/core'
+import { Autocomplete, Combobox, MantineSize, TextInput } from '@mantine/core'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { fetch } from '../../async/fetch'
+import { searchResultType } from '../../types-constants/types'
+import { useNavigate } from 'react-router'
 
 type props = {
     size?: MantineSize
@@ -8,32 +10,53 @@ type props = {
 
 export const SearchAnything = ({ size }: props) => {
     const [text, setText] = useState('')
-    const [results, setResults] = useState('')
+    const [results, setResults] = useState<string[]>([])
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const val = event.target.value
-        setText(val)
-        if (val) {
-            fetch<any>('cityNgram', val).then((response) => {
+    const handleChange = (value: string) => {
+        setText(value)
+        if (value) {
+            fetch<searchResultType[]>('searchAll', value).then((response) => {
                 console.log(response)
-                setResults(response[0].cityName || '')
+                const filteredResults = response?.map((searchObj) => (
+                  `${searchObj.name}: ${searchObj.type === 'province' ? 'region' : searchObj.type}`
+                ))
+                setResults(filteredResults || [])
             })
+        } else {
+            setResults([])
         }
     }
 
-    useEffect(() => {
-        console.log(results)
-    }, [results])
+    const navigate = useNavigate()
 
     return (
         <>
-            <TextInput
-                size={size || 'sm'}
+            <p>{Math.random()}</p>
+            {/* <Combobox withinPortal={false}>
+              <Combobox.Target>
+                <TextInput
+                    size={size || 'sm'}
+                    placeholder="Search Anything.."
+                    value={text}
+                    onChange={handleChange}
+                />
+              </Combobox.Target>
+              <Combobox.Dropdown>
+                <Combobox.Options>
+                {results.map((val, index) => (
+              <Combobox.Option key={index} value={val.name}/>
+            ))}
+                </Combobox.Options>
+              </Combobox.Dropdown>
+            </Combobox> */}
+            <Autocomplete
+                data={results.map((val) => val)}
                 placeholder="Search Anything.."
-                value={text}
                 onChange={handleChange}
-            />
-            <h2>{results}</h2>
+                onOptionSubmit={() => {
+                  navigate('/')
+                }}
+            ></Autocomplete>
         </>
     )
 }

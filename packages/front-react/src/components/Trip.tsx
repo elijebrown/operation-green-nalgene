@@ -1,13 +1,19 @@
-import { useLoaderData } from 'react-router'
+import { useLoaderData, useParams } from 'react-router'
 import { useEffect } from 'react'
 import { Cloudinary } from '@cloudinary/url-gen'
 import { LibraryView } from '../features/photoLayouts/LibraryView'
 import { genericLoaderFunction } from '../async/genericLoaderFunction'
 import { CarouselView } from '../features/photoLayouts/CarouselView'
 import { Flex } from '@mantine/core'
+import { useTripsData } from '../state/hooks'
 
 export const Trip = () => {
     const photosObjArr = useLoaderData<typeof genericLoaderFunction>()
+    const { tripId } = useParams()
+
+    useEffect(() => {
+      console.log(tripId)
+    }, [tripId])
 
     return (
         // <Flex justify='center' gap={10} display={'flex'} wrap={'wrap'}>

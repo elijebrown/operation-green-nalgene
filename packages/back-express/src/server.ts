@@ -6,6 +6,7 @@ import { tripNgram } from './routes/indexSearch/tripNgram';
 import { cityNgram } from './routes/indexSearch/citiesNgram';
 import { provinceNgram } from './routes/indexSearch/provinceNgram';
 import { getTripPhotos } from './routes/getTripPhotos';
+import { createSearchRoute, searchRoutes } from './routes/indexSearch/createSearchRoute';
 
 export const app = express();
 const PORT = 3000;
@@ -50,6 +51,10 @@ app.get('/test', async (req: Request, res: Response) => {
 FROM cities c
 JOIN photos p ON c.id = p.city_id`)
     res.send(result.rows)
+})
+
+searchRoutes.forEach(({endpoint, query}) => {
+  createSearchRoute(endpoint, query)
 })
 
 tripNgram()

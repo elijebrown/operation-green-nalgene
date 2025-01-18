@@ -34,8 +34,6 @@ CREATE EXTENSION IF NOT EXISTS pg_ivm WITH SCHEMA pg_catalog;
 --
 
 COMMENT ON EXTENSION pg_ivm IS 'incremental view maintenance on PostgreSQL';
-
-
 --
 -- TOC entry 14 (class 2615 OID 18600)
 -- Name: paradedb; Type: SCHEMA; Schema: -; Owner: -

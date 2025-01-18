@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { memoriesType, tripsType } from '../types-constants/types'
 import { useNavigate } from 'react-router'
 import { fetch } from '../async/fetch'
+import { useStore } from '../state/store'
 
 export const HoverCardNavButtons = () => {
     const navigate = useNavigate()
@@ -16,6 +17,13 @@ export const HoverCardNavButtons = () => {
         queryKey: ['memoryNames'],
         queryFn: () => fetch<memoriesType[]>('memories'),
     })
+
+    if (trips.data){
+      useStore.setState({tripsData: trips.data})
+    }
+    if (memories.data){
+      useStore.setState({memoriesData: memories.data})
+    }
 
     return (
         <>

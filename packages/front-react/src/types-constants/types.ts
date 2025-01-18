@@ -27,3 +27,10 @@ export type photosType = {
     id: number
     photoFilepath: string
 }
+
+export type searchResultType = {
+  id: number, 
+  name: string, 
+  type: string, 
+  score: number
+}

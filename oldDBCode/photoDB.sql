@@ -56,7 +56,7 @@ CREATE TABLE memories (
     id SERIAL PRIMARY KEY, 
     trip_id INT NOT NULL,  
     memory_text TEXT,
-    memory_name TEXT
+    memory_title TEXT
     FOREIGN KEY (trip_id) REFERENCES trips(id)
 );
 
