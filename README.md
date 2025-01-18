@@ -12,18 +12,10 @@ docker exec -it database psql -U pablo_escobar_gaviria -d narcos -W
 APyRnWxbJu7JB#
 
 ### Backing up the Database with Pg_dump
-Access Control (ACL) breaks pg_dump for some reason, so exclude. (you will have to re-add)
-Consequently, it makes sense to also remove ownership restrictions on the data (not sensitive data anyway)
+docker exec -e PGPASSWORD='APyRnWxbJu7JB#' database pg_dump -U pablo_escobar_gaviria --verbose --no-acl --no-owner narcos > backupDatabase.sql
 
-pg_dump narcos --verbose -U pablo_escobar_gaviria -W --no-acl --no-owner -f /tmp/backupDatabase.sql
-
-APyRnWxbJu7JB#
-
-docker cp database:/tmp/backupDatabase.sql ./backupDatabase.sql
-
-### Restoring the Database with Pg_restore
+### Restoring the Database
 docker exec -e PGPASSWORD='APyRnWxbJu7JB#' \
   -i database psql -U pablo_escobar_gaviria -d narcos \
   < backupDatabase.sql
 
-docker exec -e PGPASSWORD='APyRnWxbJu7JB#' database pg_dump -U pablo_escobar_gaviria --verbose --no-acl --no-owner narcos > backupDatabase.sql
